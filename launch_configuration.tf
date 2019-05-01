@@ -1,7 +1,7 @@
 resource "aws_launch_configuration" "bastions-nurjancluster-com" {
   name_prefix                 = "bastions.nurjancluster.com"
   image_id                    = "ami-01666ac8d55438d0b"
-  instance_type               = "${var.node_instace_type}"
+  instance_type               = "${var.node_instance_type}"
   key_name                    = "${aws_key_pair.kubernetes-nurjancluster-com-f8e5ea41168454e985d9dad9898daf75.id}"
   iam_instance_profile        = "${aws_iam_instance_profile.bastions-nurjancluster-com.id}"
   security_groups             = ["${aws_security_group.bastion-nurjancluster-com.id}"]
