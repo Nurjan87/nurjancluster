@@ -58,7 +58,7 @@ resource "aws_security_group" "nodes-nurjancluster-com" {
   }
 }
 
-resource "aws_security_group_rule" "all-master-to-master" {
+resource "aws_security_group_rule" "all_master-to-master" {
   type                     = "ingress"
   security_group_id        = "${aws_security_group.masters-nurjancluster-com.id}"
   source_security_group_id = "${aws_security_group.masters-nurjancluster-com.id}"
@@ -67,7 +67,7 @@ resource "aws_security_group_rule" "all-master-to-master" {
   protocol                 = "-1"
 }
 
-resource "aws_security_group_rule" "all-master-to-node" {
+resource "aws_security_group_rule" "all_master-to-node" {
   type                     = "ingress"
   security_group_id        = "${aws_security_group.nodes-nurjancluster-com.id}"
   source_security_group_id = "${aws_security_group.masters-nurjancluster-com.id}"
@@ -214,6 +214,7 @@ resource "aws_security_group_rule" "ssh-elb-to-bastion" {
 resource "aws_security_group_rule" "ssh-external-to-bastion-elb-0-0-0-0--0" {
   type              = "ingress"
   security_group_id = "${aws_security_group.bastion-elb-nurjancluster-com.id}"
+  source_security_group_id = "${aws_security_group.bastion-elb-nurjancluster-com.id}"
   from_port         =  "${var.from_port}"
   to_port           = "${var.to_port}"
   protocol          = "tcp"
