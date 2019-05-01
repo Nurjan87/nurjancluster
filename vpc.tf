@@ -26,6 +26,4 @@ resource "aws_vpc_dhcp_options_association" "nurjancluster-com" {
   dhcp_options_id = "${aws_vpc_dhcp_options.nurjancluster-com.id}"
 }
 
-terraform = {
-  required_version = ">= 0.9.3"
-}
+

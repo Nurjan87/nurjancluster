@@ -116,8 +116,8 @@ resource "aws_security_group_rule" "bastion-to-master-ssh" {
   type                     = "ingress"
   security_group_id        = "${aws_security_group.masters-nurjancluster-com.id}"
   source_security_group_id = "${aws_security_group.bastion-nurjancluster-com.id}"
-  from_port                = 22
-  to_port                  = 22
+  from_port                = "${var.from_port}"
+  to_port                  = "${var.to_port}"
   protocol                 = "tcp"
 }
 
@@ -125,8 +125,8 @@ resource "aws_security_group_rule" "bastion-to-node-ssh" {
   type                     = "ingress"
   security_group_id        = "${aws_security_group.nodes-nurjancluster-com.id}"
   source_security_group_id = "${aws_security_group.bastion-nurjancluster-com.id}"
-  from_port                = 22
-  to_port                  = 22
+  from_port                = "${var.from_port}"
+  to_port                  = "${var.to_port}"
   protocol                 = "tcp"
 }
 
@@ -206,16 +206,29 @@ resource "aws_security_group_rule" "ssh-elb-to-bastion" {
   type                     = "ingress"
   security_group_id        = "${aws_security_group.bastion-nurjancluster-com.id}"
   source_security_group_id = "${aws_security_group.bastion-elb-nurjancluster-com.id}"
-  from_port                = 22
-  to_port                  = 22
+  from_port                = "${var.from_port}"
+  to_port                  = "${var.to_port}"
   protocol                 = "tcp"
 }
 
 resource "aws_security_group_rule" "ssh-external-to-bastion-elb-0-0-0-0--0" {
   type              = "ingress"
   security_group_id = "${aws_security_group.bastion-elb-nurjancluster-com.id}"
-  from_port         = 22
-  to_port           = 22
+  from_port         =  "${var.from_port}"
+  to_port           = "${var.to_port}"
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
+
+source "aws_subnet" "eu-west-1b-nurjancluster-com" {
+  vpc_id            = "${aws_vpc.nurjancluster-com.id}"
+  cidr_block        = "172.20.64.0/19"
+  availability_zone = "eu-west-1b"
+
+  tags = {
+    KubernetesCluster                         = "nurjancluster.com"
+    Name                                      = "eu-west-1b.nurjancluster.com"
+    SubnetType                                = "Private"
+    "kubernetes.io/cluster/nurjancluster.com" = "owned"
+    "kubernetes.io/role/internal-elb"         = "1"
+  }
 }
