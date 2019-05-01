@@ -219,7 +219,7 @@ resource "aws_security_group_rule" "ssh-external-to-bastion-elb-0-0-0-0--0" {
   to_port           = "${var.to_port}"
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-
+}
 source "aws_subnet" "eu-west-1b-nurjancluster-com" {
   vpc_id            = "${aws_vpc.nurjancluster-com.id}"
   cidr_block        = "172.20.64.0/19"
