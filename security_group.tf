@@ -232,3 +232,4 @@ source "aws_subnet" "eu-west-1b-nurjancluster-com" {
     "kubernetes.io/cluster/nurjancluster.com" = "owned"
     "kubernetes.io/role/internal-elb"         = "1"
   }
+}
