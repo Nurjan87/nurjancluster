@@ -2,7 +2,7 @@ bastion_min_size   =  "1"
 bastion_max_size   =  "1"
 node_min_size      =  "2"
 node_max_size      =  "2"
-// node_instance_type =  "2"
+node_instance_type =  "2"
 node_instance_type = "t2.micro"
 
 bastion_ins_type = "t2.micro"

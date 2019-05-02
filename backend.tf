@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "nurjancluster123.com"
-    key    = "state/nurjan_cluster"
+    key    = "state/nurjancluster"
     region = "eu-west-1"
   }
 }
